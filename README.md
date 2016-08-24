@@ -5,6 +5,7 @@ I recently wanted to upload some HTML books to my Kindle. Disappointed by the wa
 ## Contents
 
 * A Gentle Introduction to Haskell ([Source](https://www.haskell.org/tutorial/)) ([EPUB](https://drive.google.com/file/d/0B_sU33gr527ZWnlxV3BaaWZmd0U/view?usp=sharing)) ([MOBI](https://drive.google.com/file/d/0B_sU33gr527ZdlkwTE02MklPTWM/view?usp=sharing))
+* Real World Haskell (WIP) ([Source](http://book.realworldhaskell.org/)) ([EPUB](https://drive.google.com/file/d/0B_sU33gr527ZOUxTRTlmY0J2c28/view?usp=sharing)) ([MOBI](https://drive.google.com/file/d/0B_sU33gr527ZN3RCN0FGeUxpbkE/view?usp=sharing))
 
 ## Disclaimer
 
