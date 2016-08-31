@@ -44,7 +44,7 @@ function main() {
     )
 
     mv "$tmpdir/out.epub" "$outputfilename"
-        kindlegen -gif "$outputfilename"
+        kindlegen "$outputfilename"
 }
 
 function fix_image_paths() {

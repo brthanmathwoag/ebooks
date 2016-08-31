@@ -39,7 +39,7 @@ function main() {
     )
 
     mv "$tmpdir/out.epub" "$outputfilename"
-    kindlegen "$outputfilename"
+    kindlegen -gif "$outputfilename"
 }
 
 function remove_headers_and_footers() {
