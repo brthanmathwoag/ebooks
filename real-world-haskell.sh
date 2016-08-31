@@ -29,6 +29,7 @@ function main() {
     cp $inputdir/support/figs/* "$figsdir/"
     fix_image_paths
     remove_scripts
+    remove_headers_and_footers
     
     echo "application/epub+zip" > "$outputdir/mimetype"
     
@@ -55,6 +56,18 @@ function fix_image_paths() {
 
 function remove_scripts() {
     sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
+}
+
+function remove_headers_and_footers() {
+
+    sed -ri 's/<div class=\"navheader\"><table.*?<\/table><\/div>//g' $outputdir/read/*.html
+    sed -ri 's/<div class=\"navheader\"><h2.*?<\/span><\/h2><\/div>//g' $outputdir/read/*.html
+
+    sed -ri 's/<div class=\"navfooter\".*?<\/div>//g' $outputdir/read/*.html
+
+    sed -ri 's/<div class=\"rwhfooter\">.*//g' $outputdir/read/*.html
+    sed -ri 's/\s+John Goerzen. This work is licensed under a.*//g' $outputdir/read/*.html
+        sed -ri 's/\s+    Commons Attribution-Noncommercial 3.0 License.*?<\/div>//g' $outputdir/read/*.html
 }
 
 function build_container_xml() {
