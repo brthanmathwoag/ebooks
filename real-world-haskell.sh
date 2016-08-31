@@ -25,8 +25,9 @@ function main() {
     
     mkdir -p "$figsdir"
     cp $inputdir/read/figs/* "$figsdir/"
-    cp "$inputdir/support/rwh-200.jpg" "$figsdir/"
+    cp "$inputdir/support/rwh-200.jpg" "$outputdir/"
     cp $inputdir/support/figs/* "$figsdir/"
+    fix_image_paths
     
     echo "application/epub+zip" > "$outputdir/mimetype"
     
@@ -44,6 +45,11 @@ function main() {
 
     mv "$tmpdir/out.epub" "$outputfilename"
         kindlegen -gif "$outputfilename"
+}
+
+function fix_image_paths() {
+	sed -i 's/src=\"\/support\/figs\//src=\"..\/figs\//g' $outputdir/read/*.html
+	sed -i 's/src=\"figs\//src=\"..\/figs\//g' $outputdir/read/*.html
 }
 
 function build_container_xml() {
@@ -65,9 +71,11 @@ function build_content_opf() {
     <dc:language>en</dc:language>
     <dc:title>$booktitle</dc:title>
     <dc:identifier id="uuid_id" opf:scheme="uuid">$bookid</dc:identifier>
+	<meta name="cover" content="im_title"/>
   </metadata>
   <manifest>
     <item href="read/index.html" id="ch0" media-type="application/xhtml+xml"/>
+    <item href="rwh-200.jpg" id="im_title" media-type="image/jpeg" />
     $(iterate_chapters append_chapter_to_manifest)
     $(append_images_to_manifest)
   </manifest>
@@ -75,6 +83,10 @@ function build_content_opf() {
     <itemref idref="ch0"/>
     $(iterate_chapters append_chapter_to_spine)
   </spine>
+  <guide>
+    <reference href="read/index.html" title="Contents" type="toc"/>
+    <reference href="read/why-functional-programming-why-haskell.html" title="start" type="text"/>
+  </guide>
 </package>
 EOF
 }
@@ -121,8 +133,12 @@ function append_chapter_to_manifest() {
 }
 
 function append_images_to_manifest() {
-    #TODO
-    echo ''
+    i=0
+    for filename in $(ls $figsdir/*.*); do
+		extension=$(echo $filename | sed -r 's/.*\.(.*)/\1/')
+        ((i=i+1))
+        echo "    <item href=\"figs/$filename\" id=\"im$i\" media-type=\"image/$extension\"/>"
+    done
 }
 
 function append_chapter_to_spine() {
