@@ -2,6 +2,7 @@
 
 booktitle='Real World Haskell'
 bookid='8f73e19b-3f86-4ba2-9aaa-90d30d3fdae4'
+outputfilename='real-world-haskell.epub'
 
 tmpdir='/tmp/rwh'
 inputdir="$tmpdir/in"
@@ -41,7 +42,8 @@ function main() {
         zip -Xur9D "$tmpdir/out.epub" * >> /dev/null
     )
 
-    mv "$tmpdir/out.epub" "real-world-haskell.epub"
+    mv "$tmpdir/out.epub" "$outputfilename"
+        kindlegen -gif "$outputfilename"
 }
 
 function build_container_xml() {

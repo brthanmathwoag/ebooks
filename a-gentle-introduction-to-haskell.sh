@@ -2,6 +2,7 @@
 
 booktitle='A Gentle Introduction to Haskell Version 98'
 bookid='3dbc527d-5174-4a3c-b61e-dc60c224da12'
+outputfilename='haskell-98-tutorial.epub'
 
 tmpdir='/tmp/gith'
 inputdir="$tmpdir/in"
@@ -37,7 +38,8 @@ function main() {
         zip -Xur9D "$tmpdir/out.epub" * >> /dev/null
     )
 
-    mv "$tmpdir/out.epub" "haskell-98-tutorial.epub"
+    mv "$tmpdir/out.epub" "$outputfilename"
+    kindlegen "$outputfilename"
 }
 
 function remove_headers_and_footers() {
