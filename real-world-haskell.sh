@@ -28,6 +28,7 @@ function main() {
     cp "$inputdir/support/rwh-200.jpg" "$outputdir/"
     cp $inputdir/support/figs/* "$figsdir/"
     fix_image_paths
+    remove_scripts
     
     echo "application/epub+zip" > "$outputdir/mimetype"
     
@@ -50,6 +51,10 @@ function main() {
 function fix_image_paths() {
 	sed -i 's/src=\"\/support\/figs\//src=\"..\/figs\//g' $outputdir/read/*.html
 	sed -i 's/src=\"figs\//src=\"..\/figs\//g' $outputdir/read/*.html
+}
+
+function remove_scripts() {
+    sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
 }
 
 function build_container_xml() {
