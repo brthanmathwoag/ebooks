@@ -152,10 +152,13 @@ function append_chapter_to_manifest() {
 
 function append_images_to_manifest() {
     i=0
-    for filename in $(ls $outputdir/fig*.gif); do
-        ((i=i+1))
-        echo "    <item href=\"$filename\" id=\"im$i\" media-type=\"image/gif\"/>"
-    done
+    (
+        cd "$outputdir"
+        for filename in $(ls fig*.gif); do
+            ((i=i+1))
+            echo "    <item href=\"$filename\" id=\"im$i\" media-type=\"image/gif\"/>"
+        done
+    )
 }
 
 function append_chapter_to_spine() {

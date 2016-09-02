@@ -162,11 +162,14 @@ function append_chapter_to_manifest() {
 
 function append_images_to_manifest() {
     i=0
-    for filename in $(ls $figsdir/*.*); do
-		extension=$(echo $filename | sed -r 's/.*\.(.*)/\1/')
-        ((i=i+1))
-        echo "    <item href=\"figs/$filename\" id=\"im$i\" media-type=\"image/$extension\"/>"
-    done
+    (
+        cd "$figsdir"
+        for filename in $(ls *.*); do
+            extension=$(echo $filename | sed -r 's/.*\.(.*)/\1/')
+            ((i=i+1))
+            echo "    <item href=\"figs/$filename\" id=\"im$i\" media-type=\"image/$extension\"/>"
+        done
+    )
 }
 
 function append_chapter_to_spine() {
