@@ -29,6 +29,7 @@ function main() {
     cp $inputdir/support/figs/* "$figsdir/"
     fix_image_paths
     remove_scripts
+    remove_css
     remove_headers_and_footers
     
     echo "application/epub+zip" > "$outputdir/mimetype"
@@ -56,6 +57,10 @@ function fix_image_paths() {
 
 function remove_scripts() {
     sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
+}
+
+function remove_css() {
+    sed -ri 's/<link rel=\"stylesheet\".*?css">//g' $outputdir/read/*.html
 }
 
 function remove_headers_and_footers() {
