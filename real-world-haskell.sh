@@ -31,6 +31,7 @@ function main() {
     remove_scripts
     remove_css
     remove_headers_and_footers
+    remove_chapter_tocs
     
     echo "application/epub+zip" > "$outputdir/mimetype"
     
@@ -73,6 +74,10 @@ function remove_headers_and_footers() {
     sed -ri 's/<div class=\"rwhfooter\">.*//g' $outputdir/read/*.html
     sed -ri 's/\s+John Goerzen. This work is licensed under a.*//g' $outputdir/read/*.html
         sed -ri 's/\s+    Commons Attribution-Noncommercial 3.0 License.*?<\/div>//g' $outputdir/read/*.html
+}
+
+function remove_chapter_tocs() {
+    sed -ri 's/<div class=\"toc\".*?<\/dl><\/div>//g' $outputdir/read/*.html
 }
 
 function build_container_xml() {
