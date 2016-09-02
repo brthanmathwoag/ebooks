@@ -25,7 +25,7 @@ function main() {
     fix_index
     fix_links_to_onlinereport
     
-    echo "application/epub+zip" > "$outputdir/mimetype"
+    echo -n "application/epub+zip" > "$outputdir/mimetype"
 
     chapters=$(sed -rn 's/<LI><a href=\"(.*)\">(.*)<\/a>/\1;\2/p' "$inputdir/index.html")
     build_container_xml

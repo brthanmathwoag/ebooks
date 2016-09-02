@@ -33,7 +33,7 @@ function main() {
     remove_headers_and_footers
     remove_chapter_tocs
     
-    echo "application/epub+zip" > "$outputdir/mimetype"
+    echo -n "application/epub+zip" > "$outputdir/mimetype"
     
     chapters=$(sed -rn 's/.*<a href=\"(.*)\">(.*)<\/a><\/li>.*/\1;\2/p' "$inputdir/read/index.html")
 
