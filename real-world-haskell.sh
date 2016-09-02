@@ -61,7 +61,7 @@ function remove_scripts() {
 }
 
 function remove_css() {
-    sed -ri 's/<link rel=\"stylesheet\".*?css">//g' $outputdir/read/*.html
+    sed -ri 's/<link rel=\"stylesheet\".*?css"\/?>//g' $outputdir/read/*.html
 }
 
 function remove_headers_and_footers() {
