@@ -66,20 +66,6 @@ function build_container_xml() {
 EOF
 }
 
-function build_titlepage() {
-    cat << EOF > "$outputdir/title.html"
-<html>
-    <head>
-        <title>$booktitle</title>
-        <style>body { text-align: center; }</style>
-    </head>
-    <body>
-        <img src="title.gif" />
-    </body>
-</html>
-EOF
-}
-
 function build_content_opf() {
     cat << EOF > "$outputdir/content.opf"
 <?xml version='1.0' encoding='utf-8'?>
@@ -91,6 +77,7 @@ function build_content_opf() {
     <meta name="cover" content="im_title"/>
   </metadata>
   <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
     <item href="index.html" id="pre" media-type="application/xhtml+xml"/>
     $(iterate_chapters append_chapter_to_manifest)
     <item href="title.gif" id="im_title" media-type="image/gif" />
@@ -123,7 +110,7 @@ function build_toc_ncx() {
     <text>$booktitle</text>
   </docTitle>
   <navMap>
-    <navPoint id="pre" playorder="0">
+    <navPoint id="pre" playOrder="0">
       <navLabel>
         <text>Preamble</text>
       </navLabel>
@@ -167,7 +154,7 @@ function append_chapter_to_spine() {
 
 function append_chapter_to_toc() {
     cat <<-EOF
-    <navPoint id="nav$1" playorder="$1">
+    <navPoint id="nav$1" playOrder="$1">
       <navLabel>
         <text>$3</text>
       </navLabel>

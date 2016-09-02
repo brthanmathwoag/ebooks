@@ -48,7 +48,7 @@ function main() {
     )
 
     mv "$tmpdir/out.epub" "$outputfilename"
-        kindlegen "$outputfilename"
+    kindlegen "$outputfilename"
 }
 
 function fix_image_paths() {
@@ -102,6 +102,7 @@ function build_content_opf() {
 	<meta name="cover" content="im_title"/>
   </metadata>
   <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
     <item href="read/index.html" id="ch0" media-type="application/xhtml+xml"/>
     <item href="rwh-200.jpg" id="im_title" media-type="image/jpeg" />
     $(iterate_chapters append_chapter_to_manifest)
@@ -133,7 +134,7 @@ function build_toc_ncx() {
     <text>$booktitle</text>
   </docTitle>
   <navMap>
-    <navPoint id="nav0" playorder="0">
+    <navPoint id="nav0" playOrder="0">
       <navLabel>
         <text>Preamble</text>
       </navLabel>
@@ -178,7 +179,7 @@ function append_chapter_to_spine() {
 
 function append_chapter_to_toc() {
     cat << EOF
-    <navPoint id="nav$1" playorder="$1">
+    <navPoint id="nav$1" playOrder="$1">
       <navLabel>
         <text>$3</text>
       </navLabel>
