@@ -28,6 +28,7 @@ function main() {
     cp "$inputdir/support/rwh-200.jpg" "$outputdir/"
     cp $inputdir/support/figs/* "$figsdir/"
     fix_image_paths
+    fix_rss_anchors
     remove_scripts
     remove_headers_and_footers
     
@@ -54,12 +55,15 @@ function fix_image_paths() {
 	sed -i 's/src=\"figs\//src=\"..\/figs\//g' $outputdir/read/*.html
 }
 
+function fix_rss_anchors() {
+	sed -i 's/href=\"\/feeds\//href=\"http:\/\/book.realworldhaskell.org\/feeds\//g' $outputdir/read/*.html
+}
+
 function remove_scripts() {
     sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
 }
 
 function remove_headers_and_footers() {
-
     sed -ri 's/<div class=\"navheader\"><table.*?<\/table><\/div>//g' $outputdir/read/*.html
     sed -ri 's/<div class=\"navheader\"><h2.*?<\/span><\/h2><\/div>//g' $outputdir/read/*.html
 
