@@ -63,6 +63,8 @@ function fix_rss_anchors() {
 
 function remove_scripts() {
     sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
+    sed -ri 's/<script.*//g' "$outputdir/read/index.html"
+    sed -ri 's/.*\/script>//g' "$outputdir/read/index.html"
 }
 
 function remove_css() {
