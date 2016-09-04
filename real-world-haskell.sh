@@ -30,9 +30,11 @@ function main() {
     fix_image_paths
     fix_rss_anchors
     remove_scripts
+    remove_css
     remove_headers_and_footers
+    remove_chapter_tocs
     
-    echo "application/epub+zip" > "$outputdir/mimetype"
+    echo -n "application/epub+zip" > "$outputdir/mimetype"
     
     chapters=$(sed -rn 's/.*<a href=\"(.*)\">(.*)<\/a><\/li>.*/\1;\2/p' "$inputdir/read/index.html")
 
@@ -47,7 +49,7 @@ function main() {
     )
 
     mv "$tmpdir/out.epub" "$outputfilename"
-        kindlegen "$outputfilename"
+    kindlegen "$outputfilename"
 }
 
 function fix_image_paths() {
@@ -63,6 +65,10 @@ function remove_scripts() {
     sed -ri 's/<script.*?\/script>//g' $outputdir/read/*.html
 }
 
+function remove_css() {
+    sed -ri 's/<link rel=\"stylesheet\".*?css"\/?>//g' $outputdir/read/*.html
+}
+
 function remove_headers_and_footers() {
     sed -ri 's/<div class=\"navheader\"><table.*?<\/table><\/div>//g' $outputdir/read/*.html
     sed -ri 's/<div class=\"navheader\"><h2.*?<\/span><\/h2><\/div>//g' $outputdir/read/*.html
@@ -72,6 +78,10 @@ function remove_headers_and_footers() {
     sed -ri 's/<div class=\"rwhfooter\">.*//g' $outputdir/read/*.html
     sed -ri 's/\s+John Goerzen. This work is licensed under a.*//g' $outputdir/read/*.html
         sed -ri 's/\s+    Commons Attribution-Noncommercial 3.0 License.*?<\/div>//g' $outputdir/read/*.html
+}
+
+function remove_chapter_tocs() {
+    sed -ri 's/<div class=\"toc\".*?<\/dl><\/div>//g' $outputdir/read/*.html
 }
 
 function build_container_xml() {
@@ -96,6 +106,7 @@ function build_content_opf() {
 	<meta name="cover" content="im_title"/>
   </metadata>
   <manifest>
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
     <item href="read/index.html" id="ch0" media-type="application/xhtml+xml"/>
     <item href="rwh-200.jpg" id="im_title" media-type="image/jpeg" />
     $(iterate_chapters append_chapter_to_manifest)
@@ -127,7 +138,7 @@ function build_toc_ncx() {
     <text>$booktitle</text>
   </docTitle>
   <navMap>
-    <navPoint id="nav0" playorder="0">
+    <navPoint id="nav0" playOrder="0">
       <navLabel>
         <text>Preamble</text>
       </navLabel>
@@ -156,11 +167,14 @@ function append_chapter_to_manifest() {
 
 function append_images_to_manifest() {
     i=0
-    for filename in $(ls $figsdir/*.*); do
-		extension=$(echo $filename | sed -r 's/.*\.(.*)/\1/')
-        ((i=i+1))
-        echo "    <item href=\"figs/$filename\" id=\"im$i\" media-type=\"image/$extension\"/>"
-    done
+    (
+        cd "$figsdir"
+        for filename in $(ls *.*); do
+            extension=$(echo $filename | sed -r 's/.*\.(.*)/\1/')
+            ((i=i+1))
+            echo "    <item href=\"figs/$filename\" id=\"im$i\" media-type=\"image/$extension\"/>"
+        done
+    )
 }
 
 function append_chapter_to_spine() {
@@ -169,7 +183,7 @@ function append_chapter_to_spine() {
 
 function append_chapter_to_toc() {
     cat << EOF
-    <navPoint id="nav$1" playorder="$1">
+    <navPoint id="nav$1" playOrder="$1">
       <navLabel>
         <text>$3</text>
       </navLabel>
