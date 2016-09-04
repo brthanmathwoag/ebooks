@@ -77,9 +77,11 @@ function remove_headers_and_footers() {
 
     sed -ri 's/<div class=\"navfooter\".*?<\/div>//g' $outputdir/read/*.html
 
+    mv "$outputdir/read/index.html" "$outputdir/read/index.html._"
     sed -ri 's/<div class=\"rwhfooter\">.*//g' $outputdir/read/*.html
     sed -ri 's/\s+John Goerzen. This work is licensed under a.*//g' $outputdir/read/*.html
-        sed -ri 's/\s+    Commons Attribution-Noncommercial 3.0 License.*?<\/div>//g' $outputdir/read/*.html
+    sed -ri 's/\s+    Commons Attribution-Noncommercial 3.0 License.*?<\/div>//g' $outputdir/read/*.html
+    mv "$outputdir/read/index.html._" "$outputdir/read/index.html"
 }
 
 function remove_chapter_tocs() {
