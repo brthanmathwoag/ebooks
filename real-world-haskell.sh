@@ -120,7 +120,6 @@ function build_content_opf() {
   </spine>
   <guide>
     <reference href="read/index.html" title="Contents" type="toc"/>
-    <reference href="read/why-functional-programming-why-haskell.html" title="start" type="text"/>
   </guide>
 </package>
 EOF

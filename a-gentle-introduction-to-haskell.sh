@@ -89,8 +89,6 @@ function build_content_opf() {
   </spine>
   <guide>
     <reference href="indextutorial.html" title="Contents" type="toc"/>
-    <!--<reference href="titlepage.xhtml" title="Cover" type="cover"/>-->
-    <reference href="index.html" title="start" type="text"/>
   </guide>
 </package>
 EOF
