@@ -32,7 +32,7 @@ function main() {
     remove_scripts
     remove_css
     remove_headers_and_footers
-    remove_chapter_tocs
+    #remove_chapter_tocs
     
     echo -n "application/epub+zip" > "$outputdir/mimetype"
     
