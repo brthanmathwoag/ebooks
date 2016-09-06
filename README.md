@@ -1,6 +1,6 @@
 # ebooks
 
-I recently wanted to upload some HTML books to my Kindle. Disappointed by the way Calibre handles HTML files, I decided to make a script that would convert them to an appropriate format on my own.
+I recently wanted to upload some HTML books to my Kindle. Disappointed by the way Calibre handles HTML files, I decided to make a script that would convert them to the appropriate format on my own.
 
 ## Contents
 
