@@ -42,14 +42,6 @@ function main() {
 
     mv "$tmpdir/out.epub" "$outputfilename"
     kindlegen "$outputfilename"
-    
-
-    #currdir=`pwd`
-    #cd "$inputdir"
-    #sed -i "s/parser\\.parse(data, encoding='utf-8')/parser\\.parse(data)/" "$inputdir/util/validate.py"
-    
-    #publish
-    #cd "$currdir"
 }
 
 function add_explicit_head_and_body() {
