@@ -25,6 +25,7 @@ function main() {
 
     add_explicit_head_and_body
     remove_javascript
+    remove_navigation
 
     echo -n "application/epub+zip" > "$outputdir/mimetype"
 
@@ -55,10 +56,18 @@ function add_explicit_head_and_body() {
     sed -ri 's/<meta charset=utf-8>/<html><head><meta charset=utf-8>/' "$outputdir"/*.html
     sed -ri "s/<meta name=viewport content='initial-scale=1\\.0'>/<meta name=viewport content='initial-scale=1\\.0'><\\/head><body>/" "$outputdir"/*.html
     sed -ri 's/<script src=j\/dip3\.js><\/script>/<\/body><\/html>/' "$outputdir"/*.html
+    sed -ri 's/<p id=level>.*//g' "$outputdir"/*.html
 }
 
 function remove_javascript() {
     sed -ri 's/<script src=[^>]*>[^>]*<\/script>//g' "$outputdir"/*.html
+}
+
+function remove_navigation() {
+    sed -ri 's/<p class=v>.*//g' "$outputdir"/*.html
+    sed -ri 's/<p class=c>.*//g' "$outputdir"/*.html
+    sed -ri 's/<p>You are here:.*//g' "$outputdir"/*.html
+    sed -ri 's/<form action=http:\/\/www\.google.com\/cse>.*//g' "$outputdir"/*.html
 }
 
 function build_container_xml() {
