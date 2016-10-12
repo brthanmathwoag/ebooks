@@ -11,7 +11,7 @@ outputdir="$tmpdir/out"
 function main() {
     if [ ! -e "$inputdir" ]; then
         mkdir -p "$inputdir"
-        git clone https://github.com/diveintomark/diveintopython3 "$inputdir/in"
+        git clone https://github.com/diveintomark/diveintopython3 "$inputdir"
     fi
 
     if [ ! -e "$outputdir" ]; then
