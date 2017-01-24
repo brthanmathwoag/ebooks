@@ -4,9 +4,9 @@ I recently wanted to upload some HTML books to my Kindle. Disappointed by the wa
 
 ## Contents
 
-* A Gentle Introduction to Haskell ([Source](https://www.haskell.org/tutorial/)) ([EPUB](https://drive.google.com/file/d/0B_sU33gr527ZWnlxV3BaaWZmd0U/view?usp=sharing)) ([MOBI](https://drive.google.com/file/d/0B_sU33gr527ZdlkwTE02MklPTWM/view?usp=sharing))
-* Real World Haskell ([Source](http://book.realworldhaskell.org/)) ([EPUB](https://drive.google.com/file/d/0B_sU33gr527ZOUxTRTlmY0J2c28/view?usp=sharing)) ([MOBI](https://drive.google.com/file/d/0B_sU33gr527ZN3RCN0FGeUxpbkE/view?usp=sharing))
-* Dive into Python 3 ([Source](http://www.diveintopython3.net/)) ([EPUB](https://drive.google.com/file/d/0B_sU33gr527ZQkk0VzdSTGxadzA/view?usp=sharing)) ([MOBI](https://drive.google.com/file/d/0B_sU33gr527ZRUNhc0xsQ2liTVE/view?usp=sharing))
+* A Gentle Introduction to Haskell ([Source](https://www.haskell.org/tutorial/)) ([EPUB](https://tznvy.eu/ebooks/haskell-98-tutorial.epub)) ([MOBI](https://tznvy.eu/ebooks/haskell-98-tutorial.mobi))
+* Real World Haskell ([Source](http://book.realworldhaskell.org/)) ([EPUB](https://tznvy.eu/ebooks/real-world-haskell.epub)) ([MOBI](https://tznvy.eu/ebooks/real-world-haskell.mobi))
+* Dive into Python 3 ([Source](http://www.diveintopython3.net/)) ([EPUB](https://tznvy.eu/ebooks/dive-into-python3.epub)) ([MOBI](https://tznvy.eu/ebooks/dive-into-python3.mobi))
 
 ## Dependencies
 
